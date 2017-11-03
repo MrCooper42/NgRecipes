@@ -1,4 +1,19 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ContentChild, ElementRef } from '@angular/core';
+import {
+    AfterContentChecked,
+    AfterContentInit,
+    AfterViewChecked,
+    AfterViewInit,
+    Component,
+    DoCheck,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    SimpleChanges,
+    ViewChild,
+    ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -6,16 +21,60 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./server-element.component.css'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class ServerElementComponent implements OnInit {
-  @Input('srvElement') element: {
-    type: string;
-    name: string;
-    content: string;
-  };
+export class ServerElementComponent implements 
+  OnInit,
+  OnChanges, 
+  DoCheck, 
+  AfterContentInit, 
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy {
 
-  constructor() { }
+  @Input('srvElement') element: {type: string, name: string, content: string};
+  @Input() name: string;
+  @ViewChild('heading') header: ElementRef; 
+  @ContentChild('contentParagraph') paragraph: ElementRef;
+
+  constructor() {
+    console.log('constructor called');
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges called!');
+  }
 
   ngOnInit() {
+    console.log('ngOnInit called!');
+    console.log('Text Content: ', this.header.nativeElement.textContent);
+    console.log('Text Content of paragraph: ', this.paragraph.nativeElement.textContent);
+  }
+  
+  ngDoCheck() {
+    console.log('ngDocheck called!');
+  }
+
+  ngAfterContentInit() {
+    console.log('afterContenetInit called!');
+    console.log('Text Content of paragraph: ', this.paragraph.nativeElement.textContent);
+  }
+
+  ngAfterContentChecked() {
+    console.log('afterContenetChecked called!');
+  }
+
+  ngAfterViewInit() {
+    console.log('afterViewInit called!');
+    console.log('Text Content: ', this.header.nativeElement.textContent);
+  }
+
+  ngAfterViewChecked() {
+    console.log('afterViewChecked called!');
+  }
+
+  ngOnDestroy() {
+    console.log('onDestroy called!');
+
   }
 
 }
