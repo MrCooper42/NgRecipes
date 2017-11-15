@@ -9,7 +9,7 @@ import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.compo
   imports: [
     CommonModule
   ],
-exports : [RecipesComponent],
+  exports: [RecipesComponent],
   declarations: [RecipesComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent]
 })
 export class RecipesModule { }
